@@ -1,0 +1,15 @@
+{
+  "name": "elmgiphy",
+  "version": "1.0.0",
+  "description": "Giphy search",
+  "main": "Main.elm",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rick Faaberg",
+  "license": "ISC"
+}
