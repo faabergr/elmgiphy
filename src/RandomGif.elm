@@ -3,7 +3,7 @@ module RandomGif where
 import Effects exposing (Effects, Never)
 import Html exposing (..)
 import Html.Attributes exposing (style)
-import Html.Events exposing (onClick)
+import Html.Events exposing (..)
 import Http
 import Json.Decode as Json
 import Task
@@ -26,6 +26,7 @@ init topic =
 type Action
     = RequestMore
     | NewGif (Maybe String)
+    | ChangeTopic String
     
 update : Action -> Model -> (Model, Effects Action)
 update action model =
@@ -37,6 +38,9 @@ update action model =
             ( Model model.topic (Maybe.withDefault model.gifUrl maybeUrl)
             , Effects.none
             )
+            
+        ChangeTopic topic ->
+            ( { model | topic = topic }, Effects.none )     
 
 -- VIEW
 
@@ -48,6 +52,9 @@ view address model =
         [ h2 [headerStyle] [text model.topic]
         , div [imgStyle model.gifUrl] []
         , button [ onClick address RequestMore ] [ text "More please!" ]
+        , input 
+            [ Html.Attributes.value model.topic
+            , on "input" targetValue (Signal.message address << ChangeTopic) ] []
         ]
 
 
